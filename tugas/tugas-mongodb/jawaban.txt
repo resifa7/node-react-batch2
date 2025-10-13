@@ -1,0 +1,39 @@
+1. Membuat Database
+- use myshop
+
+2. Membuat Collection dan Memasukan Data pada Collection
+- Collection Users
+db.users.insertMany([
+        {name: 'John Doe', email: 'john@doe.com', password: 'john123'}, 
+        {name: 'Jane Doe', email: 'jane@doe.com', password: 'jenita123'}
+    ])
+
+- Collection Categories
+db.categories.insertMany([
+        {name: 'gadget'},
+        {name: 'cloth'},
+        {name: 'men'},
+        {name: 'women'},
+        {name: 'branded'}
+    ])
+
+- Collection items
+db.items.insertMany([
+        {name: 'Sumsang b50', description: 'hape keren dari merek sumsang', price: 4000000, stock: 100},
+        {name: 'Uniklooh', description: 'baju keren dari brand ternama', price: 500000, stock: 50},
+        {name: 'IMHO Watch', description: 'jam tangan anak yang jujur banget', price: 2000000, stock: 10}
+    ])
+
+3. Mengambil Data dari Database
+- Buatlah sebuah query untuk mendapatkan data seluruh user pada collection users. Sajikan semua field pada collection users KECUALI password nya.
+db.users.find({}, {password: 0 })
+
+- Buatlah sebuah query untuk mendapatkan data item pada collection items yang memiliki harga di atas 1000000 (satu juta)
+db.items.find({price: {$gt: 1000000}})
+
+- Buat sebuah query untuk mengambil data item pada collection items yang memiliki name serupa atau mirip (like) dengan kata kunci “uniklo”, “watch”, atau “sang” (pilih salah satu saja)
+db.items.find({name: /watch/i})
+
+4. Ubahlah data pada collection items untuk item dengan nama sumsang harganya (price) menjadi 2500000. Masukkan query pada text jawaban di nomor ke 4.
+db.items.updateOne(
+    {name: /sumsang/i}, {$set: {price: 2500000}})

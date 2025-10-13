@@ -1,0 +1,44 @@
+SELECT p.title, p.body, a.name AS author , c.name AS category
+FROM blog_posts p
+JOIN users a ON p.author_id = a.id
+JOIN post_categories pc ON p.id = pc.posts_id
+JOIN categories c ON pc.categories_id = c.id
+WHERE a.name = 'John Doe';
+
+SELECT p.title, p.body, a.name AS author , c.name AS category
+FROM blog_posts p
+JOIN users a ON p.author_id = a.id
+JOIN post_categories pc ON p.id = pc.posts_id
+JOIN categories c ON pc.categories_id = c.id
+WHERE c.name = 'Basic';
+
+SELECT p.title, p.body, a.name AS author , c.name AS category
+FROM blog_posts p
+JOIN users a ON p.author_id = a.id
+JOIN post_categories pc ON p.id = pc.posts_id
+JOIN categories c ON pc.categories_id = c.id
+WHERE a.name IN ("Robert", "Frank");
+
+SELECT p.title, p.body, a.name AS author, c.name AS category
+FROM blog_posts p
+JOIN users a ON p.author_id = a.id
+JOIN post_categories pc ON p.id = pc.posts_id
+JOIN categories c ON pc.categories_id = c.id
+WHERE p.id IN (
+  SELECT posts_id
+  FROM post_categories
+  GROUP BY posts_id
+  HAVING COUNT(DISTINCT categories_id) >= 2
+);
+
+SELECT p.title, p.body, a.name AS author, c.name AS category
+FROM blog_posts p
+JOIN users a ON p.author_id = a.id
+JOIN post_categories pc ON p.id = pc.posts_id
+JOIN categories c ON pc.categories_id = c.id
+WHERE p.id IN (
+  SELECT posts_id
+  FROM post_categories
+  GROUP BY posts_id
+  HAVING COUNT(DISTINCT categories_id) = 1
+);
