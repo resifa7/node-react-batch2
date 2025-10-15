@@ -63,8 +63,69 @@ const store = (req, res) => {
   });
 };
 
+const movie=(req, res) => {
+conn.query("SELECT * FROM movies", (err, data) => {
+
+if (err) {
+console.error(err);
+return;
+}
+// rows fetch
+
+res.json(data);
+});
+}
+const movie_by_id=(req, res) => {
+  const {id} = req.params;
+conn.query(`SELECT * FROM movies WHERE id=${id}`, (err, data) => {
+
+if (err) {
+console.error(err);
+return;
+}
+// rows fetch
+
+res.json(data);
+});
+}
+
+const updateMovie = (req, res) => {
+    let {title, year} = req.body
+    let {id} = req.params
+
+    let queryText = `UPDATE movies SET title="${title}", year=${year}, updated_at=now() 
+                    WHERE id=${id}`
+
+    conn.query(queryText, (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+   
+        res.json({message: "Succefully Update", status:"success"});
+    });
+}
+
+const deleteMovie = (req, res) => {
+    let {id} = req.params
+    let queryText = `DELETE FROM movies WHERE id=${id}`
+
+   conn.query(queryText, (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+   
+        res.json({message: "Succefully Delete", status:"success"});
+    });
+}
+
 module.exports = {
   getMovies,
   getMovieById,
   store,
+  movie,
+  movie_by_id,
+  updateMovie,
+  deleteMovie
 };
