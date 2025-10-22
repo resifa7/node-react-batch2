@@ -1,0 +1,34 @@
+p {
+  color: aqua;
+}
+
+.satu {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+  background-color: red;
+  align-content: center;
+  position: relative;
+}
+
+.dua {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+  background-color: green;
+  align-content: center;
+}
+
+.tiga {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+  background-color: blue;
+  align-content: center;
+}
